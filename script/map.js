@@ -61,8 +61,6 @@ L.marker([47.50143822387308, 19.057622980229777]).addTo(map)
         <div style="font-size: 1rem">look, I made it work</div>`)
     .openPopup();
 
-getLocation()
-
 pois.forEach(poi => createMarker(poi))
 
 function createMarker(poi) {
@@ -87,15 +85,16 @@ function createMarker(poi) {
 // Geolocation API:
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(createMarker);
+        navigator.geolocation.getCurrentPosition(createMyLocationMarker);
     } else {
         console.log('Geolocation is not supported by this browser.')
     }
 }
   
 
-function createMarker(position) {
+function createMyLocationMarker(position) {
     L.marker([position.coords.latitude, position.coords.longitude], {icon: greenIcon}).addTo(map)
         .bindPopup('You are here')
-        // .openPopup();
 }
+
+getLocation()
